@@ -14,7 +14,7 @@ class CircuitInstructionRunner(private val wireDefinitions: Map<String, String>,
     fun resolveWireValue(wireName: String): Short {
         val wireDefinition = wireDefinitions.getValue(wireName)
         return wireValues.getOrPut(wireName) {
-            resolveIfAsignment(wireDefinition)
+            resolveIfAssignment(wireDefinition)
                     ?: resolveIfNot(wireDefinition)
                     ?: resolveIfOtherOperation(wireDefinition)
                     ?: throw IllegalArgumentException("Wire definition did not match regexes: '$wireDefinition'")
@@ -37,7 +37,7 @@ class CircuitInstructionRunner(private val wireDefinitions: Map<String, String>,
         }
     }
 
-    private fun resolveIfAsignment(wireDefinition: String): Short? {
+    private fun resolveIfAssignment(wireDefinition: String): Short? {
         return ASSIGNMENT_REGEX.find(wireDefinition)?.let { matchResult ->
             resolveInput(matchResult.groupValues[1])
         }
