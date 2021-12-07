@@ -66,9 +66,6 @@ class PathFinder(private val distanceMap: Map<String, Map<String, Int>>) {
 
             println(pathFinder.findShortestRoute())
             println(pathFinder.findLongestRoute())
-
-
-
         }
     }
 
